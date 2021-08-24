@@ -72,8 +72,6 @@ window.addEventListener('DOMContentLoaded', () => {
         menuItems.forEach(elem => elem.addEventListener('click', handlerMenu));
     };
 
-    toggleMenu();
-
     // popup
 
     const togglePopUp = () => {
@@ -105,7 +103,25 @@ window.addEventListener('DOMContentLoaded', () => {
         popupClose.addEventListener('click', () => { popup.style.display = 'none'; });
     };
 
+    const smoothScroll = () => {
+        const anchors = document.querySelectorAll('a[href*="#"]');
+
+        for (const anchor of anchors) {
+            anchor.addEventListener('click', event => {
+                event.preventDefault();
+                const blockID = anchor.getAttribute('href');
+                document.querySelector('' + blockID).scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        }
+    };
+
+
+    toggleMenu();
     togglePopUp();
+    smoothScroll();
 });
 
 
